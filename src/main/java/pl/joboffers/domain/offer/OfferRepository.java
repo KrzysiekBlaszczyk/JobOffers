@@ -12,7 +12,7 @@ public interface OfferRepository {
 
     Optional<Offer> getOfferByUrl(String url);
 
-    boolean existsByOfferUrl(String url);
+    boolean existsByUrl(String url);
 
     List<Offer> saveAll(List<Offer> offers);
 }
