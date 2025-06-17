@@ -30,10 +30,13 @@ public class OfferFacade {
                 .orElseThrow(() -> new OfferNotFoundException(id));
     }
 
+    public OfferResponseDto getOfferByUrl(String url) {
+        return repository.getOfferByUrl(url)
+                .map(OfferMapper::mapFromOfferToOfferDto)
+                .orElseThrow(() -> new OfferNotFoundException(url));
+    }
+
     public OfferResponseDto saveOffer(OfferDto offerDto) {
-        if(repository.existsByOfferUrl(offerDto.url())){
-            throw new OfferDuplicateException(offerDto.url());
-        }
         final Offer offer = OfferMapper.mapFromOfferDtoToOffer(offerDto);
         final Offer save = repository.save(offer);
         return OfferMapper.mapFromOfferToOfferDto(save);

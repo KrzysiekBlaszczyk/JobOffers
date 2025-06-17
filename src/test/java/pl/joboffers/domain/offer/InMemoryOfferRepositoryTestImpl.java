@@ -15,9 +15,11 @@ public class InMemoryOfferRepositoryTestImpl implements OfferRepository {
         if(database.values().stream().anyMatch(offer -> offer.url().equals(entity.url()))) {
             throw new OfferDuplicateException(entity.url());
         }
-        UUID id = UUID.randomUUID();
-        Offer offer = new Offer(id.toString(), entity.url(), entity.jobTitle(), entity.company(), entity.salary());
-        database.put(id.toString(), offer);
+        if(database.containsKey(entity.id())) {
+            throw new OfferSavingException(entity.id());
+        }
+        Offer offer = new Offer(entity.id(), entity.company(), entity.jobTitle(), entity.salary(), entity.url());
+        database.put(entity.id(), offer);
         return offer;
     }
 
@@ -34,14 +36,17 @@ public class InMemoryOfferRepositoryTestImpl implements OfferRepository {
 
     @Override
     public Optional<Offer> getOfferByUrl(String url) {
-        return Optional.ofNullable(database.get(url));
+        return database.values().stream()
+                .filter(offer -> offer.url().equals(url))
+                .findFirst();
     }
 
     @Override
-    public boolean existsByOfferUrl(String url) {
+    public boolean existsByUrl(String url) {
         long count = database.values().stream()
                 .filter(offer -> offer.url().equals(url))
                 .count();
+        System.out.println(url + count);
         return count == 1;
     }
 
