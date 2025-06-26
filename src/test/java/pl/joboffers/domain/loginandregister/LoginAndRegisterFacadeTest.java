@@ -1,7 +1,8 @@
 package pl.joboffers.domain.loginandregister;
 
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import pl.joboffers.domain.loginandregister.dto.RegisterUserDto;
 import pl.joboffers.domain.loginandregister.dto.RegistrationResultDto;
 import pl.joboffers.domain.loginandregister.dto.UserDto;
