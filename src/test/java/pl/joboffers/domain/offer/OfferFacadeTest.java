@@ -1,6 +1,7 @@
 package pl.joboffers.domain.offer;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import pl.joboffers.domain.offer.dto.JobOfferResponse;
 import pl.joboffers.domain.offer.dto.OfferDto;
 import pl.joboffers.domain.offer.dto.OfferResponseDto;
