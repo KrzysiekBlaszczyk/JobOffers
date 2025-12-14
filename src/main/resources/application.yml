@@ -2,3 +2,12 @@ spring:
   data:
     mongodb:
       uri: mongodb://admin:admin@localhost:27017/job-offers-db
+
+offer:
+  http:
+    client:
+      config:
+        uri: http://example.com
+        port: 8080
+        connectionTimeout: 5000
+        readTimeout: 5000
